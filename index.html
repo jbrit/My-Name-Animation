@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jibola GSAP Test</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/anim.css" />
+  </head>
+  <body>
+    <div class="main bg-dark">
+      <div class="sub container-fluid position-absolute">
+        <div class="row">
+          <div
+            class="my-name position-absolute d-flex align-items-center justify-content-center"
+          >
+            Ajibola Ojo
+          </div>
+          <div class="col-3 slide"></div>
+          <div class="col-3 slide"></div>
+          <div class="col-3 slide"></div>
+          <div class="col-3 slide"></div>
+          <span
+            id="next"
+            class="next position-absolute d-flex align-items-center justify-content-center"
+            ><ion-icon name="eye"></ion-icon
+          ></span>
+        </div>
+      </div>
+      <span
+        id="previous"
+        class="previous position-absolute d-flex align-items-center justify-content-center"
+        ><ion-icon name="eye-off"></ion-icon
+      ></span>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+    <script>
+      var tl = gsap.timeline({ defaults: { duration: 1 } });
+      tl.to(".previous", { translateY: 100, duration: 0.6 })
+        .to(".sub", { zIndex: 1, duration: 0 })
+        .from(".slide", {
+          backgroundPosition: "0 -100vh",
+          duration: 0.9,
+          stagger: 0.2,
+        })
+        .to(".my-name", { scale: 1, ease: "Bounce.easeOut" })
+        .from(".next", { translateY: 100, duration: 0.5 });
+      document.getElementById("next").addEventListener("click", () => {
+        if (tl.isActive() === true) {
+          return;
+        }
+        tl.reverse();
+      });
+      document.getElementById("previous").addEventListener("click", () => {
+        if (tl.isActive() === true) {
+          return;
+        }
+        tl.play();
+      });
+    </script>
+  </body>
+</html>
